@@ -60,5 +60,7 @@ Baseline model (model_0), LSTM model (model_2) and USE model trained on the full
 
 ![imbalanced datasets](sentiment_model/models_results_plots/all_models_f1_score_df_under_sampled.png)
 
+Run train.py to train and save model.
+
 Inside config file could be set active model path 
 
