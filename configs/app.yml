@@ -1,0 +1,32 @@
+active_model: "models/model_5"
+
+model_1_path: "models/model_1"
+model_2_path: "models/model_2"
+model_3_path: "models/model_3"
+model_4_path: "models/model_4"
+model_5_path: "models/model_5"
+model_6_path: "models/model_6"
+model_7_path: "models/model_7"
+
+conf_matrix_save_path: "matrix_plots/{}_confusion_matrix.png"
+logs_save_dir_path: "models_logs"
+
+main_dataset: "data/IMDB_Dataset.csv"
+
+train_data_path: "data/IMDB_train.csv"
+val_data_path: "data/IMDB_val.csv"
+test_data_path: "data/IMDB_test.csv"
+
+train_over_sampled_data_path: "data/IMDB_train_over.csv"
+val_over_sampled_data_path: "data/IMDB_val_over.csv"
+test_over_sampled_data_path: "data/IMDB_test_over.csv"
+
+train_under_sampled_data_path: "data/IMDB_train_under.csv"
+val_under_sampled_data_path: "data/IMDB_val_under.csv"
+test_under_sampled_data_path: "data/IMDB_test_under.csv"
+
+random_under_sampling_plot_path: "data_plots/random_under_sampling"
+random_over_sampling_plot_path: "data_plots/random_over_sampling"
+main_data_plot_path: "data_plots/main_data"
+
+all_models_result_plot_path: "models_results_plots/{}"
