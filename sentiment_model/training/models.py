@@ -41,7 +41,7 @@ class TfModel(ABC):
         if metric_score == "fb":
             self.metric_score = FBetaScore(num_classes=2, average="micro", beta=3.0, threshold=0.5)
         else:
-            self.metric_score = F1Score(num_classes=2, average="micro", beta=3.0, threshold=0.5)
+            self.metric_score = F1Score(num_classes=2, average="micro", threshold=0.5)
 
     @abstractmethod
     def x_layers(self):
