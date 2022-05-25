@@ -79,9 +79,13 @@ For run API and configure model:
            tf_hub_10_percent_data                
 ```
 
+For example:
+
      python3 -m sentiment_model.training.app --model lstm
 
 ### To test in local environment run:
+
+For example:
 
     curl  -X POST -d '{"review": "A very good story for a film which if done properly would be quite interesting"}' http://localhost:8080/identify_sentiment -H "Content-Type:application/json"
 
