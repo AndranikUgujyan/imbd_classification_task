@@ -14,7 +14,7 @@ class ModelSavingLoading:
         try:
 
             model = tf.keras.models.load_model(model_path,
-                                                   custom_objects={"loss": tfa.losses.SigmoidFocalCrossEntropy()})
+                                               custom_objects={"loss": tfa.losses.SigmoidFocalCrossEntropy()})
             logger.debug(f'Loading complete from {model_path}')
             return model
         except Exception as err:
@@ -27,7 +27,6 @@ class ModelSavingLoading:
             return True
         except Exception as err:
             return error_response(f'error={err}', logger)
-
 
 # if __name__ == "__main__":
 #     model_6_path = "/home/andranik/dev/imbd_classification/models/model_5"

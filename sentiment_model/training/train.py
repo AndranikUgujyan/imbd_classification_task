@@ -1,5 +1,7 @@
+import os
 import numpy as np
 import pandas as pd
+import sentiment_model
 from matplotlib import pyplot as plt
 import dataframe_image as dfi
 from sentiment_model import app_config
@@ -9,9 +11,17 @@ import tensorflow as tf
 
 from sentiment_model.utils.help_func import calculate_results
 
-train_df = pd.read_csv(app_config['train_data_path'])
-val_df = pd.read_csv(app_config['train_data_path'])
-test_df = pd.read_csv(app_config['train_data_path'])
+abs_dir_path = os.path.dirname(os.path.abspath(sentiment_model.__file__))
+
+ALL_MODELS_RESULT_PLOT_ABS_PATH = os.path.join(abs_dir_path, app_config["all_models_result_plot_path"])
+
+train_data_abs_path = os.path.join(abs_dir_path, app_config['train_data_path'])
+val_data_abs_path = os.path.join(abs_dir_path, app_config['val_data_path'])
+test_data_abs_path = os.path.join(abs_dir_path, app_config['test_data_path'])
+
+train_df = pd.read_csv(train_data_abs_path)
+val_df = pd.read_csv(val_data_abs_path)
+test_df = pd.read_csv(test_data_abs_path)
 
 train_sentences = train_df["review"].to_numpy()
 train_labels = train_df["sentiment"].to_numpy()
@@ -54,11 +64,11 @@ all_model_results = all_model_results.transpose()
 print(all_model_results)
 all_model_results["accuracy"] = all_model_results["accuracy"] / 100
 
-all_models_result_plot_path = app_config["all_models_result_plot_path"].format("all_models_results_under_sampled.png")
+all_models_result_plot_path = ALL_MODELS_RESULT_PLOT_ABS_PATH.format("all_models_results_under_sampled.png")
 all_models_result = all_model_results.plot(kind="bar", figsize=(10, 7)).legend(bbox_to_anchor=(1.0, 1.0))
 plt.savefig(all_models_result_plot_path, dpi=300)
 
-all_models_results_f1_score_path = app_config["all_models_result_plot_path"].format("all_models_f1_score_under_sampled.png")
+all_models_results_f1_score_path = ALL_MODELS_RESULT_PLOT_ABS_PATH.format("all_models_f1_score_under_sampled.png")
 all_model_results_fig = all_model_results.sort_values("f1", ascending=False)["f1"].plot(kind="bar", figsize=(10, 7))
 plt.savefig(all_models_results_f1_score_path, dpi=300)
 
@@ -76,7 +86,22 @@ all_model_results.loc["ensemble_results"]["accuracy"] = all_model_results.loc["e
 print(all_model_results)
 df_styled = all_model_results.style.background_gradient()
 
-all_models_results_path = app_config["all_models_result_plot_path"].format("all_models_f1_score_df_under_sampled.png")
+all_models_results_path = ALL_MODELS_RESULT_PLOT_ABS_PATH.format("all_models_f1_score_df_under_sampled.png")
 dfi.export(df_styled, all_models_results_path)
 
-tf_model_1.save(app_config['model_1_path'])
+model_1_abs_path = os.path.join(abs_dir_path, app_config['model_1_path'])
+model_2_abs_path = os.path.join(abs_dir_path, app_config['model_2_path'])
+model_3_abs_path = os.path.join(abs_dir_path, app_config['model_3_path'])
+model_4_abs_path = os.path.join(abs_dir_path, app_config['model_4_path'])
+model_5_abs_path = os.path.join(abs_dir_path, app_config['model_5_path'])
+model_6_abs_path = os.path.join(abs_dir_path, app_config['model_6_path'])
+model_7_abs_path = os.path.join(abs_dir_path, app_config['model_7_path'])
+
+# tf_model_1.save(model_1_abs_path)
+# tf_model_2.save(model_2_abs_path)
+# tf_model_3.save(model_3_abs_path)
+# tf_model_4.save(model_4_abs_path)
+# tf_model_5.save(model_5_abs_path)
+# tf_model_6.save(model_6_abs_path)
+tf_model_7.save(model_7_abs_path)
+

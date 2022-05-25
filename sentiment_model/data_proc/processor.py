@@ -1,10 +1,10 @@
-import numpy as np
+import os
+import sentiment_model
 import pandas as pd
 from imblearn.over_sampling import RandomOverSampler
 from imblearn.under_sampling import RandomUnderSampler
 from sklearn.model_selection import train_test_split
 from matplotlib import pyplot as plt
-from collections import Counter
 from sentiment_model import app_config
 from sentiment_model.data_proc.normalizer import TextNormalizer
 
@@ -71,24 +71,37 @@ def split_train_val_test(normalized_df):
 
 
 if __name__ == "__main__":
-    path_of_dataset = app_config['main_dataset']
+    abs_dir_path = os.path.dirname(os.path.abspath(sentiment_model.__file__))
 
-    path_of_train = app_config['train_data_path']
-    path_of_val = app_config['val_data_path']
-    path_of_test = app_config['test_data_path']
+    path_of_dataset = os.path.join(abs_dir_path, app_config['main_dataset'])
 
-    path_of_over_sampled_train = app_config['train_over_sampled_data_path']
-    path_of_over_sampled_val = app_config['val_over_sampled_data_path']
-    path_of_over_sampled_test = app_config['test_over_sampled_data_path']
+    path_of_train = os.path.join(abs_dir_path, app_config['train_data_path'])
+    path_of_val = os.path.join(abs_dir_path, app_config['val_data_path'])
+    path_of_test = os.path.join(abs_dir_path, app_config['test_data_path'])
 
-    path_of_under_sampled_train = app_config['train_under_sampled_data_path']
-    path_of_under_sampled_val = app_config['val_under_sampled_data_path']
-    path_of_under_sampled_test = app_config['test_under_sampled_data_path']
+    path_of_over_sampled_train = os.path.join(abs_dir_path, app_config['train_over_sampled_data_path'])
+    path_of_over_sampled_val = os.path.join(abs_dir_path, app_config['val_over_sampled_data_path'])
+    path_of_over_sampled_test = os.path.join(abs_dir_path, app_config['test_over_sampled_data_path'])
+
+    path_of_under_sampled_train = os.path.join(abs_dir_path, app_config['train_under_sampled_data_path'])
+    path_of_under_sampled_val = os.path.join(abs_dir_path, app_config['val_under_sampled_data_path'])
+    path_of_under_sampled_test = os.path.join(abs_dir_path, app_config['test_under_sampled_data_path'])
 
     norm_df = read_and_normalize_dataset(path_of_dataset)
     resampled_df_over, resampled_df_under = random_over_and_under_sampler_imblearn(norm_df)
-    train, val, test = split_train_val_test(resampled_df_under)
 
-    train.to_csv(path_of_under_sampled_train, index=False)
-    val.to_csv(path_of_under_sampled_val, index=False)
-    test.to_csv(path_of_under_sampled_test, index=False)
+    train_norm, val_norm, test_norm = split_train_val_test(norm_df)
+    train_under, val_under, test_under = split_train_val_test(resampled_df_under)
+    train_over, val_over, test_over = split_train_val_test(resampled_df_over)
+
+    train_norm.to_csv(path_of_train, index=False)
+    val_norm.to_csv(path_of_val, index=False)
+    test_norm.to_csv(path_of_test, index=False)
+
+    train_under.to_csv(path_of_under_sampled_train, index=False)
+    val_under.to_csv(path_of_under_sampled_val, index=False)
+    test_under.to_csv(path_of_under_sampled_test, index=False)
+
+    train_over.to_csv(path_of_over_sampled_train, index=False)
+    val_over.to_csv(path_of_over_sampled_val, index=False)
+    test_over.to_csv(path_of_over_sampled_test, index=False)

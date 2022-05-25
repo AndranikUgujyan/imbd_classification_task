@@ -31,6 +31,13 @@ def calculate_results(y_true, y_pred):
     return model_results
 
 
+def compare_baseline_to_new_results(baseline_results, new_model_results):
+    for key, value in baseline_results.items():
+        result = f"Baseline {key}: {value:.2f}, New {key}: {new_model_results[key]:.2f}, " \
+                 f"Difference: {new_model_results[key] - value:.2f}"
+        return result
+
+
 def create_tensorboard_callback(dir_name, experiment_name):
     """
     Creates a TensorBoard callback instand to store log files and stores log files with the filepath.

@@ -1,10 +1,14 @@
+import os
+import sentiment_model
 import tensorflow as tf
 from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay
 
 from sentiment_model import app_config
 from sentiment_model.utils.help_func import calculate_results
 
-CM_SAV_PATH = app_config['conf_matrix_save_path']
+abs_dir_path = os.path.dirname(os.path.abspath(sentiment_model.__file__))
+
+CM_SAV_PATH = os.path.join(abs_dir_path, app_config['conf_matrix_save_path'])
 
 
 class ModelPrediction:

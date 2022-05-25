@@ -1,5 +1,22 @@
 # Sentiment API
 
+## Run API
+
+For run API and configure model:
+
+### Arguments documentation for API rune:
+```
+--model    simple_dense
+           lstm
+           gru
+           bidirectional
+           conv1d 
+           tf_hub_sentence_encoder
+           tf_hub_10_percent_data                
+```
+
+     python3 -m sentiment_model.training.app --model lstm
+
 ### To test in local environment run:
 
     curl  -X POST -d '{"review": "A very good story for a film which if done properly would be quite interesting"}' http://localhost:8080/identify_sentiment -H "Content-Type:application/json"
@@ -29,7 +46,9 @@ Another technique
 is [focal loss](https://www.tensorflow.org/addons/api_docs/python/tfa/losses/sigmoid_focal_crossentropy). This loss is
 often used if trainings set consists of many labels and/or is highly imbalanced.
 
-
+To preprocess (normalize text) and split dataset into train/dev/test run:
+    
+    python -m sentiment_model.data_proc.processor
 
 [TextVectorization](https://www.tensorflow.org/api_docs/python/tf/keras/layers/TextVectorization) used preprocessing layer from TensorFlow.
 
@@ -45,6 +64,23 @@ often used if trainings set consists of many labels and/or is highly imbalanced.
 * Model 5: 1D Convolutional Neural Network
 * Model 6: TensorFlow Hub Pretrained Feature Extractor
 * Model 7: Same as model 6 with 10% of training data
+
+## Model Training
+
+For tuning hyper parameters run:
+
+    python3 -m sentiment_model.training.app --model lstm
+
+### Arguments documentation for training module:
+```
+--model    simple_dense
+           lstm
+           gru
+           bidirectional
+           conv1d 
+           tf_hub_sentence_encoder
+           tf_hub_10_percent_data                
+```
 
 ### Comparing the performance of each of models
 
