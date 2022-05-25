@@ -1,27 +1,5 @@
 # Sentiment API
 
-### Data:
-
-We have imbalanced datasets.
-![imbalanced datasets](sentiment_model/data_plots/main_data.png)
-
-A widely adopted technique for dealing with highly unbalanced datasets is called resampling. It consists of removing
-samples from the majority class (under-sampling) and / or adding more examples from the minority class (over-sampling).
-Inside data_proc implemented over and under resampling.
-![imbalanced datasets](resources/resampling.png)
-
-Another technique
-is [focal loss](https://www.tensorflow.org/addons/api_docs/python/tfa/losses/sigmoid_focal_crossentropy). This loss is
-often used if trainings set consists of many labels and/or is highly imbalanced.
-
-To preprocess (normalize text) and split dataset into train/dev/test run:
-    
-    python -m sentiment_model.data_proc.processor
-
-[TextVectorization](https://www.tensorflow.org/api_docs/python/tf/keras/layers/TextVectorization) used preprocessing layer from TensorFlow.
-
-[Embedding](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Embedding) used layer from TensorFlow
-
 ### Model:
 
 * Model 0: Naive Bayes (baseline)
@@ -99,3 +77,24 @@ For example:
   }
 ]
 ```
+### Data:
+
+We have imbalanced datasets.
+![imbalanced datasets](sentiment_model/data_plots/main_data.png)
+
+A widely adopted technique for dealing with highly unbalanced datasets is called resampling. It consists of removing
+samples from the majority class (under-sampling) and / or adding more examples from the minority class (over-sampling).
+Inside data_proc implemented over and under resampling.
+![imbalanced datasets](resources/resampling.png)
+
+Another technique
+is [focal loss](https://www.tensorflow.org/addons/api_docs/python/tfa/losses/sigmoid_focal_crossentropy). This loss is
+often used if trainings set consists of many labels and/or is highly imbalanced.
+
+To preprocess (normalize text) and split dataset into train/dev/test run:
+    
+    python -m sentiment_model.data_proc.processor
+
+[TextVectorization](https://www.tensorflow.org/api_docs/python/tf/keras/layers/TextVectorization) used preprocessing layer from TensorFlow.
+
+[Embedding](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Embedding) used layer from TensorFlow
