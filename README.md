@@ -1,37 +1,5 @@
 # Sentiment API
 
-## Run API
-
-For run API and configure model:
-
-### Arguments documentation for API rune:
-```
---model    simple_dense
-           lstm
-           gru
-           bidirectional
-           conv1d 
-           tf_hub_sentence_encoder
-           tf_hub_10_percent_data                
-```
-
-     python3 -m sentiment_model.training.app --model lstm
-
-### To test in local environment run:
-
-    curl  -X POST -d '{"review": "A very good story for a film which if done properly would be quite interesting"}' http://localhost:8080/identify_sentiment -H "Content-Type:application/json"
-
-**Here is an example response of `identify_sentiment` prediction endpoint:**
-
-```json
-[
-  {
-    "label": "positive",
-    "probability": "0.80608344"
-  }
-]
-```
-
 ### Data:
 
 We have imbalanced datasets.
@@ -96,7 +64,34 @@ Baseline model (model_0), LSTM model (model_2) and USE model trained on the full
 
 ![imbalanced datasets](sentiment_model/models_results_plots/all_models_f1_score_df_under_sampled.png)
 
-Run train.py to train and save model.
+## Run API
 
-Inside config file could be set active model path 
+For run API and configure model:
 
+### Arguments documentation for API rune:
+```
+--model    simple_dense
+           lstm
+           gru
+           bidirectional
+           conv1d 
+           tf_hub_sentence_encoder
+           tf_hub_10_percent_data                
+```
+
+     python3 -m sentiment_model.training.app --model lstm
+
+### To test in local environment run:
+
+    curl  -X POST -d '{"review": "A very good story for a film which if done properly would be quite interesting"}' http://localhost:8080/identify_sentiment -H "Content-Type:application/json"
+
+**Here is an example response of `identify_sentiment` prediction endpoint:**
+
+```json
+[
+  {
+    "label": "positive",
+    "probability": "0.80608344"
+  }
+]
+```
