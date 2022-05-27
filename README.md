@@ -4,7 +4,7 @@
 
     pip3 install -r requirements.txt
 
-### Model:
+### Models:
 
 * Model 0: Naive Bayes (baseline)
 * Model 1: Feed-forward neural network (dense model)
@@ -15,7 +15,7 @@
 * Model 6: TensorFlow Hub Pretrained Feature Extractor
 * Model 7: Same as model 6 with 10% of training data
 
-## Model Train and Save
+### Model Train and Save
 
 For train and save model run:
 
