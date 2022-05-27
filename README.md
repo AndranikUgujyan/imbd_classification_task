@@ -89,8 +89,7 @@ We have imbalanced datasets.
 A widely adopted technique for dealing with highly unbalanced datasets is called resampling. It consists of removing
 samples from the majority class (under-sampling) and / or adding more examples from the minority class (over-sampling).
 Inside data_proc implemented over and under resampling.
-![imbalanced datasets](resources/resampling.png)
-
+![sampling techniques of imbalance data](resources/resampling.png)
 Another technique
 is [focal loss](https://www.tensorflow.org/addons/api_docs/python/tfa/losses/sigmoid_focal_crossentropy). This loss is
 often used if trainings set consists of many labels and/or is highly imbalanced.
