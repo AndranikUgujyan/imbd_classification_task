@@ -19,7 +19,7 @@
 
 For train and save model run:
 
-    python3 -m sentiment_model.training.app --model lstm
+     python3 -m sentiment_model.training.train_models --model lstm
 
 ### Arguments documentation for training module:
 ```
