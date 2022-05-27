@@ -15,9 +15,9 @@
 * Model 6: TensorFlow Hub Pretrained Feature Extractor
 * Model 7: Same as model 6 with 10% of training data
 
-## Model Training
+## Model Train and Save
 
-For tuning hyper parameters run:
+For train and save model run:
 
     python3 -m sentiment_model.training.app --model lstm
 
