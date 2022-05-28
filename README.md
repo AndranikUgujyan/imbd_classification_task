@@ -60,7 +60,7 @@ This argument will set dataset that generated basd of sampling techniques
            tf_hub_10_percent_data
            all                
 ```
-This argument will set one of seven s model for training and save. If set "--model all", the command will train and save all seven models sequentially based on the set dataset, and will generate and save follow diagrams in models_results_plot folder.
+This argument will set one of seven s model for training and save. If set "--model all", the command will train and save all seven models sequentially based on the set dataset, and will generate and save the following diagrams in models_results_plot folder.
 
 For train and save model run:
 
