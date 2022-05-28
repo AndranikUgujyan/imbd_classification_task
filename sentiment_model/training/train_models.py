@@ -32,27 +32,6 @@ model_6_abs_path = os.path.join(ABS_DIR_PATH, app_config['model_6_path'])
 model_7_abs_path = os.path.join(ABS_DIR_PATH, app_config['model_7_path'])
 
 
-# train_data_abs_path = os.path.join(ABS_DIR_PATH, app_config['train_data_path'])
-# val_data_abs_path = os.path.join(ABS_DIR_PATH, app_config['val_data_path'])
-# test_data_abs_path = os.path.join(ABS_DIR_PATH, app_config['test_data_path'])
-
-
-# train_df = pd.read_csv(train_data_abs_path)
-# val_df = pd.read_csv(val_data_abs_path)
-# test_df = pd.read_csv(test_data_abs_path)
-#
-# train_sentences = train_df["review"].to_numpy()
-# train_labels = train_df["sentiment"].to_numpy()
-#
-# val_sentences = val_df["review"].to_numpy()
-# val_labels = val_df["sentiment"].to_numpy()
-#
-# test_sentences = test_df["review"].to_numpy()
-# test_labels = test_df["sentiment"].to_numpy()
-
-# mp = ModelPrediction(test_sentences, test_labels)
-
-
 def read_data(train_data_abs_path_func, val_data_abs_path_func, test_data_abs_path_func):
     train_df = pd.read_csv(train_data_abs_path_func)
     val_df = pd.read_csv(val_data_abs_path_func)
