@@ -41,11 +41,6 @@ The command will generate under, over and normal sampled datasets and will save 
 ***
 ### Model Train and Save
 
-For train and save model run:
-
-     python3 -m sentiment_model.training.train_models --data norm --model lstm
-
-***
 ### Arguments documentation for training module:
 
 ```
@@ -65,9 +60,11 @@ This argument will set dataset that generated basd of sampling techniques
            tf_hub_10_percent_data
            all                
 ```
-This argument will set one of seven s model for training and save.
+This argument will set one of seven s model for training and save. If set "--model all", the command will train and save all seven models sequentially based on the set dataset, and will generate and save follow diagrams in models_results_plot folder.
 
-If set "--model all", the command will train and save all seven models sequentially based on the set dataset. And will generate and save follow diagrams in models_results_plot folder.
+For train and save model run:
+
+     python3 -m sentiment_model.training.train_models --data norm --model lstm
 
 Confusion matrix of each model will be saved as a matrix_plots folder.
 
