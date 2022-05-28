@@ -105,10 +105,6 @@ if __name__ == '__main__':
     val_data_abs_path = os.path.join(ABS_DIR_PATH, app_config[f'val_{options["data"]}_sampled_data_path'])
     test_data_abs_path = os.path.join(ABS_DIR_PATH, app_config[f'test_{options["data"]}_sampled_data_path'])
 
-    print(train_data_abs_path)
-    print(train_data_abs_path)
-    print(train_data_abs_path)
-
     train_sentences, train_labels, val_sentences, val_labels, test_sentences, test_labels = read_data(
         train_data_abs_path, val_data_abs_path, test_data_abs_path)
     mp = ModelPrediction(test_sentences, test_labels)
