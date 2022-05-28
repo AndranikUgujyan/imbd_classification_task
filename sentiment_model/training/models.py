@@ -1,8 +1,10 @@
+import os
 from abc import ABC, abstractmethod
 import numpy as np
 import tensorflow as tf
 from keras.layers import TextVectorization, Embedding
 from keras import layers
+import sentiment_model
 import tensorflow_addons as tfa
 from sklearn.model_selection import train_test_split
 from tensorflow_addons.metrics import FBetaScore, F1Score
@@ -15,7 +17,9 @@ from sentiment_model import app_config
 from sentiment_model.utils.help_func import create_tensorboard_callback
 
 hub.load("https://tfhub.dev/google/universal-sentence-encoder/4")
-SAVE_DIR_PATH = app_config["logs_save_dir_path"]
+
+ABS_DIR_PATH = os.path.dirname(os.path.abspath(sentiment_model.__file__))
+SAVE_DIR_PATH = os.path.join(ABS_DIR_PATH, app_config["logs_save_dir_path"])
 
 
 class TfModel(ABC):
@@ -24,7 +28,7 @@ class TfModel(ABC):
                  train_labels,
                  val_sent,
                  val_labels,
-                 epochs_num=10,
+                 epochs_num=1,
                  loss_func="focal",
                  metric_score="fb"):
 
@@ -79,7 +83,7 @@ class TfModel(ABC):
                   self.train_labels,
                   epochs=self.epochs_num,
                   validation_data=(self.val_sent, self.val_labels),
-                  callbacks=[create_tensorboard_callback(dir_name=app_config['logs_save_dir_path'],
+                  callbacks=[create_tensorboard_callback(dir_name=SAVE_DIR_PATH,
                                                          experiment_name=self.model_experiment_name())])
 
         return model

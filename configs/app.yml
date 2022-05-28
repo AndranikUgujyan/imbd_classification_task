@@ -7,6 +7,7 @@ model_6_path: "models/model_6"
 model_7_path: "models/model_7"
 
 conf_matrix_save_path: "matrix_plots/{}_confusion_matrix.png"
+
 logs_save_dir_path: "models_logs"
 
 main_dataset: "data/IMDB_Dataset.csv"
