@@ -28,7 +28,7 @@ class TfModel(ABC):
                  train_labels,
                  val_sent,
                  val_labels,
-                 epochs_num=1,
+                 epochs_num=10,
                  loss_func="focal",
                  metric_score="fb"):
 
