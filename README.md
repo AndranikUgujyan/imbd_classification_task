@@ -103,7 +103,7 @@ The command will stop the currently running container.
 
     docker rmi -f <image-id>
 
-The command will remove the image.
+The command will delete the image.
 ***
 
 ## Run API
