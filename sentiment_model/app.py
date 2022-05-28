@@ -8,44 +8,9 @@ from sentiment_model import app_config, logger
 from sentiment_model.predicter.model_predictor import ModelPredictor
 from sentiment_model.utils.help_func import error_response, get_input_text
 
-abs_dir_path = os.path.dirname(os.path.abspath(sentiment_model.__file__))
+ABS_DIR_PATH = os.path.dirname(os.path.abspath(sentiment_model.__file__))
 
-import argparse
-
-parser = argparse.ArgumentParser()
-
-parser.add_argument('--model', type=str)
-
-OPTIONS = vars(parser.parse_args())
-
-def init_app():
-    app = Flask(__name__)
-    if OPTIONS["model"] == "simple_dense":
-        model_path = os.path.join(abs_dir_path, app_config['model_1_path'])
-        ModelPredictor.get_instance(model_path)
-    if OPTIONS["model"] == "lstm":
-        model_path = os.path.join(abs_dir_path, app_config['model_2_path'])
-        ModelPredictor.get_instance(model_path)
-    if OPTIONS["model"] == "gru":
-        model_path = os.path.join(abs_dir_path, app_config['model_3_path'])
-        ModelPredictor.get_instance(model_path)
-    if OPTIONS["model"] == "bidirectional":
-        model_path = os.path.join(abs_dir_path, app_config['model_4_path'])
-        ModelPredictor.get_instance(model_path)
-    if OPTIONS["model"] == "conv1d":
-        model_path = os.path.join(abs_dir_path, app_config['model_5_path'])
-        ModelPredictor.get_instance(model_path)
-    if OPTIONS["model"] == "tf_hub_sentence_encoder":
-        model_path = os.path.join(abs_dir_path, app_config['model_6_path'])
-        ModelPredictor.get_instance(model_path)
-    if OPTIONS["model"] == "tf_hub_10_percent_data":
-        model_path = os.path.join(abs_dir_path, app_config['model_7_path'])
-        ModelPredictor.get_instance(model_path)
-
-    return app
-
-
-app = init_app()
+app = Flask(__name__)
 
 
 @app.route('/identify_sentiment', methods=['POST'])
@@ -55,14 +20,42 @@ def predict_sentiment():
         _data = request.data.decode('utf-8')
         logger.debug(f'started, data:{_data}')
         j_obj = json.loads(_data)
-        logger.debug('get fasttext client instance')
-        model_client = ModelPredictor.get_instance()
+        logger.debug('get client instance')
+        model_path = config_model(j_obj["model"])
+        model_client = ModelPredictor(model_path)
         texts = get_input_text(j_obj, logger)
         prediction = model_client.predict(texts)
         response = app.response_class(response=json.dumps([prediction], indent=True),
                                       status=200,
                                       mimetype='application/json')
         return response
+    except Exception as err:
+        return error_response(f'error={err}', logger)
+
+
+def config_model(model_name):
+    try:
+        if model_name == "simple_dense":
+            model_path = os.path.join(ABS_DIR_PATH, app_config['model_1_path'])
+            return model_path
+        if model_name == "lstm":
+            model_path = os.path.join(ABS_DIR_PATH, app_config['model_2_path'])
+            return model_path
+        if model_name == "gru":
+            model_path = os.path.join(ABS_DIR_PATH, app_config['model_3_path'])
+            return model_path
+        if model_name == "bidirectional":
+            model_path = os.path.join(ABS_DIR_PATH, app_config['model_4_path'])
+            return model_path
+        if model_name == "conv1d":
+            model_path = os.path.join(ABS_DIR_PATH, app_config['model_5_path'])
+            return model_path
+        if model_name == "tf_hub_sentence_encoder":
+            model_path = os.path.join(ABS_DIR_PATH, app_config['model_6_path'])
+            return model_path
+        if model_name == "tf_hub_10_percent_data":
+            model_path = os.path.join(ABS_DIR_PATH, app_config['model_7_path'])
+            return model_path
     except Exception as err:
         return error_response(f'error={err}', logger)
 

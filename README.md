@@ -63,7 +63,7 @@ For run API and configure model:
 
 For example:
 
-     python3 -m sentiment_model.training.app --model lstm
+     python3 -m sentiment_model.app --model lstm
 
 ### To test in local environment run:
 
@@ -84,7 +84,7 @@ For example:
 ### Data:
 
 We have imbalanced datasets.
-![imbalanced datasets](sentiment_model/data_plots/main_data.png)
+![imbalanced datasets](sentiment_model/data_plots/main_data_plot.png)
 
 A widely adopted technique for dealing with highly unbalanced datasets is called resampling. It consists of removing
 samples from the majority class (under-sampling) and / or adding more examples from the minority class (over-sampling).

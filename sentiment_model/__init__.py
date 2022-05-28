@@ -6,3 +6,4 @@ app_config = load_cfg('configs/app.yml')
 log_file = load_cfg('configs/logging.yml')
 logging.config.dictConfig(log_file)
 logger = getLogger('sentiment_model')
+

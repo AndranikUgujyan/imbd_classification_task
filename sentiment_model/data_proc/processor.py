@@ -9,18 +9,18 @@ from sentiment_model import app_config
 from sentiment_model.data_proc.normalizer import TextNormalizer
 
 random_state = 42
+ABS_DIR_PATH = os.path.dirname(os.path.abspath(sentiment_model.__file__))
 
 
-def read_and_normalize_dataset(dataset_path):
+def read_and_normalize_dataset(dataset_path, main_dataset_plot_path):
     dataset_df = pd.read_csv(dataset_path)
     # print(dataset_df.sentiment.value_counts())
     dataset_df["sentiment"] = dataset_df.sentiment.replace(to_replace=['negative', 'positive'],
                                                            value=[0, 1])
     dataset_df['review'] = dataset_df['review'].apply(TextNormalizer().normalize)
     print(dataset_df.sentiment.value_counts())
-
     dataset_df.sentiment.value_counts().plot(kind='bar', title='Count (sentiment)')
-    plt.savefig(app_config["main_data_plot_path"], dpi=300)
+    plt.savefig(main_dataset_plot_path, dpi=300)
     return dataset_df
 
 
@@ -75,9 +75,9 @@ if __name__ == "__main__":
 
     path_of_dataset = os.path.join(abs_dir_path, app_config['main_dataset'])
 
-    path_of_train = os.path.join(abs_dir_path, app_config['train_data_path'])
-    path_of_val = os.path.join(abs_dir_path, app_config['val_data_path'])
-    path_of_test = os.path.join(abs_dir_path, app_config['test_data_path'])
+    path_of_train = os.path.join(abs_dir_path, app_config['train_norm_sampled_data_path'])
+    path_of_val = os.path.join(abs_dir_path, app_config['val_norm_sampled_data_path'])
+    path_of_test = os.path.join(abs_dir_path, app_config['test_norm_sampled_data_path'])
 
     path_of_over_sampled_train = os.path.join(abs_dir_path, app_config['train_over_sampled_data_path'])
     path_of_over_sampled_val = os.path.join(abs_dir_path, app_config['val_over_sampled_data_path'])
@@ -87,7 +87,8 @@ if __name__ == "__main__":
     path_of_under_sampled_val = os.path.join(abs_dir_path, app_config['val_under_sampled_data_path'])
     path_of_under_sampled_test = os.path.join(abs_dir_path, app_config['test_under_sampled_data_path'])
 
-    norm_df = read_and_normalize_dataset(path_of_dataset)
+    main_data_plot_abs_path = os.path.join(ABS_DIR_PATH, app_config["main_data_plot_path"])
+    norm_df = read_and_normalize_dataset(path_of_dataset, main_data_plot_abs_path)
     resampled_df_over, resampled_df_under = random_over_and_under_sampler_imblearn(norm_df)
 
     train_norm, val_norm, test_norm = split_train_val_test(norm_df)

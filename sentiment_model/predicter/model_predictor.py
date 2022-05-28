@@ -5,24 +5,11 @@ import tensorflow as tf
 
 
 class ModelPredictor:
-    __INSTANCE = None
 
     def __init__(self, model_path: str):
-        if ModelPredictor.__INSTANCE is None:
-            loader = ModelSavingLoading()
-            self._model = loader.load_model(model_path)
-            self._normalizer = TextNormalizer()
-            ModelPredictor.__INSTANCE = self
-
-    @classmethod
-    def get_instance(cls, model_path=None):
-        if cls.__INSTANCE is None:
-            cls.__INSTANCE = ModelPredictor(model_path)
-        return cls.__INSTANCE
-
-    @classmethod
-    def clear_instance(cls):
-        cls.__INSTANCE = None
+        loader = ModelSavingLoading()
+        self._model = loader.load_model(model_path)
+        self._normalizer = TextNormalizer()
 
     def predict(self, review):
         logger.debug('start prediction')
@@ -38,11 +25,11 @@ class ModelPredictor:
         prediction_result = {"label": str(label), "probability": str(pred_prob[0][0])}
         return prediction_result
 
-
 # if __name__ == "__main__":
-#     model_6_path = "/home/andranik/dev/imbd_classification/models/model_5"
+#     model_path = "/home/andranik/Desktop/imbd_classification_task/sentiment_model/models/model_4"
 #
-#     mp = ModelPredictor(model_6_path)
+#     mp = ModelPredictor(model_path)
 #     r = {
-#         "review": "A very good story for a film which if done properly would be quite interesting, but where the hell is the ending to this film?<br /><br />In fact, what is the point of it?<br /><br />The scenes zip through so quick that you felt you were not part of the film emotionally, and the feeling of being detached from understanding the storyline.<br /><br />The performances of the cast are questionable, if not believable.<br /><br />Did I miss the conclusion somewhere in the film? I guess we have to wait for the sequel.<br /><br />"}
+#         "review": "A very good story for a film which if done properly would be quite interesting, but where the hell is the ending to this film?<br /><br />In fact, what is the point of it?<br /><br />The scenes zip through so quick that you felt you were not part of the film emotionally, and the feeling of being detached from understanding the storyline.<br /><br />The performances of the cast are questionable, if not believable.<br /><br />Did I miss the conclusion somewhere in the film? I guess we have to wait for the sequel.<br /><br />"
+#         }
 #     print(mp.predict(r["review"]))
