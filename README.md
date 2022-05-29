@@ -1,6 +1,20 @@
 # Sentiment API
 ***
-### Install required packages
+#### Clone repository 
+    
+    git clone https://github.com/AndranikUgujyan/imbd_classification_task.git
+
+#### Install and create virtual environment
+
+    pip install virtualenv
+
+    virtualenv venv
+
+#### Activate a virtual environment
+
+    source venv/bin/activate
+
+#### Install required packages
 
     pip3 install -r requirements.txt
 ***
