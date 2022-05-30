@@ -99,26 +99,6 @@ Baseline model (model_0), LSTM model (model_2) and USE model trained on the full
 ![imbalanced datasets](sentiment_model/models_results_plots/all_models_f1_score_df_under_sampled.png)
 
 ***
-## Build a Docker Image
-
-    docker build -t imbd-classification-api -f Dockerfile .
-
-The command will build image and will run.
-
-If some issue with permission we can use sudo docker.
-
-    docker ps
-
-This command will show containers are currently running.
-
-    docker stop <container-name>
-
-The command will stop the currently running container.
-
-    docker rmi -f <image-id>
-
-The command will delete the image.
-***
 
 ## Run API
 ***
@@ -130,22 +110,27 @@ We have 2 option to run API:
 
      python3 -m sentiment_model.app
 
-***
-
-### Run API inside docker
-
-    docker build -t imbd-classification-api -f Dockerfile .
-
-The command will build image and will run. 
-***
-
-### Test API
-
-For example, set running host and model and execute:
+#### Test API without docker
 
     curl  -X POST -d '{"review": "A very good story for a film which if done properly would be quite interesting, but where the hell is the ending to this film?<br /><br />In fact, what is the point of it?<br /><br />The scenes zip through so quick that you felt you were not part of the film emotionally, and the feeling of being detached from understanding the storyline.<br /><br />The performances of the cast are questionable, if not believable.<br /><br />Did I miss the conclusion somewhere in the film? I guess we have to wait for the sequel.<br /><br />","model":"lstm"}'  http://172.17.0.2:8080/identify_sentiment -H "Content-Type:application/json"
 
+***
 
+### Run API inside docker docker
+
+#### Build docker image
+
+    docker build -t imbd-classification-api:1.0 -f Dockerfile .
+    
+#### Run docker
+
+    docker run -e PORT=8080 --name imbd -p "7894:8080" imbd-classification-api:1.0
+    
+#### Test API in docker
+
+    curl  -X POST -d '{"review": "A very good story for a film which if done properly would be quite interesting, but where the hell is the ending to this film?<br /><br />In fact, what is the point of it?<br /><br />The scenes zip through so quick that you felt you were not part of the film emotionally, and the feeling of being detached from understanding the storyline.<br /><br />The performances of the cast are questionable, if not believable.<br /><br />Did I miss the conclusion somewhere in the film? I guess we have to wait for the sequel.<br /><br />","model":"lstm"}'  http://127.0.0.1:7894/identify_sentiment -H "Content-Type:application/json"
+
+***
 
 **Here is an example response of `identify_sentiment` prediction endpoint:**
 

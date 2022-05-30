@@ -18,7 +18,8 @@ ADD configs configs
 
 #ENV PORT 8080
 
-RUN python3 -m sentiment_model.app
-#ENV PORT 8080
+#RUN python3 -m sentiment_model.app
+ENV PORT 8080
 #
 #CMD [ "python3", "-m" , "sentiment_model.app"]
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 --max-requests-jitter 10 'sentiment_model.app:app'
